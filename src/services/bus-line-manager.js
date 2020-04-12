@@ -69,7 +69,6 @@ export default class BusLineManager {
         return linesThatStopIn         
     }
 
-    // todo write test
     getRouteSolver(){
         let routeSolver = new BusRouteSolver()
         this.stops.forEach(stop=>routeSolver.addStop(stop.name))
