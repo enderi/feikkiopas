@@ -1,5 +1,15 @@
-# soldabis-reitit
+# Solidabis Koodihaaste
+- [Speksit](https://koodihaaste.solidabis.com/)
+## Teknopino
+- [Vue.js](https://vuejs.org/) (projekti luotu w/ [Vue CLI](https://cli.vuejs.org/))
+- [Jest Testing framework](https://jestjs.io/)
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 
+## Hakualgoritmi
+Reitin hakuun käytetty algoritmi käy verkkoa läpi leveyssuunnassa (BFS) ja löydettyään lyhimmän (tai useamman yhtä pitkän) lopettaa haun. Saadusta tulosjoukosta valitaan se, jossa on käytetty vähiten eri linjastoja. 
+
+---
+Buildi, testi ja käynnistyskäskyt alla. (Vue CLI:n generoima)
 ## Project setup
 ```
 npm install
