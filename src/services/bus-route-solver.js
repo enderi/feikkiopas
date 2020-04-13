@@ -4,7 +4,7 @@ import GraphEdge from '../models/graph/graph-edge'
 import GraphPath from '../models/graph/graph-path'
 
 /* PRIVATE FUNCS */
-function getLineChangesForPath(path){
+function pluckLineChangesFromPath(path){
     return path
         .getTraveledEdges()
         .map(edge => edge.getPropertyForKey('busLineName'))
@@ -13,21 +13,21 @@ function getLineChangesForPath(path){
         })
 }
 
-function compareTravelTimes(a, b) {
-    return a.getTravelTime() < b.getTravelTime() ? -1 : 1
+function compareTravelTimesOfEdges(edge1, edge2) {
+    return edge1.getTravelTime() < edge2.getTravelTime() ? -1 : 1
 }
 
-function findRoutes(initialPath, targetNode){
-    let paths = [initialPath]
+function findShortestRoutes(initialPath, targetNode){
+    let pathsToExplore = [initialPath]
     const matchingRoutes = []
-    while (paths.length > 0) {
+    while (pathsToExplore.length > 0) {
         let newSetOfPathsToExplore = []
 
-        paths.forEach(path => {
+        pathsToExplore.forEach(path => {
             if (path.getCurrentNode() === targetNode) {
                 matchingRoutes.unshift(path) // shortest paths should always be in smaller indexes
             } else {
-                const edges = path.getNonVisitedEdges().sort(compareTravelTimes)
+                const edges = path.getNonVisitedEdges().sort(compareTravelTimesOfEdges)
                 edges.forEach(edge => {
                     const cl = path.getClone();
                     cl.moveTo(edge)
@@ -46,7 +46,7 @@ function findRoutes(initialPath, targetNode){
             })
             newSetOfPathsToExplore = stillToDiscover
         }
-        paths = newSetOfPathsToExplore
+        pathsToExplore = newSetOfPathsToExplore
     }
     return matchingRoutes
 }
@@ -95,7 +95,7 @@ export default class BusRouteSolver {
         const initialPath = new GraphPath();
         initialPath.setStartingNode(this.graph.getNodeForName(from))
 
-        const matchingRoutes = findRoutes(initialPath, targetNode)
+        const matchingRoutes = findShortestRoutes(initialPath, targetNode)
 
         if (matchingRoutes.length === 0) {
             throw new Error('No route found')
@@ -109,8 +109,8 @@ export default class BusRouteSolver {
             if(path1.getTotalTravelTime() > path2.getTotalTravelTime()){
                 return 1
             }
-            let lineChangesForPath1 = getLineChangesForPath(path1)
-            let lineChangesForPath2 = getLineChangesForPath(path2)
+            let lineChangesForPath1 = pluckLineChangesFromPath(path1)
+            let lineChangesForPath2 = pluckLineChangesFromPath(path2)
             return lineChangesForPath1.length < lineChangesForPath2.length ? -1 : 1
         })
 
