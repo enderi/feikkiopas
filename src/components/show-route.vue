@@ -1,0 +1,31 @@
+<template>
+    <div class="foundRoute-view">
+        <div>Reitti selvä!</div>
+        <div>Etapit:</div>
+        <ul>
+            <li
+                    v-for="(step, index) in route"
+                    v-bind:key="index"
+            >Pysäkiltä {{step.from}} pysäkille {{step.to}} käyttäen linjaa '{{step.props['busLineName']}}'
+                ({{step.travelTime}} aikayksikköä)
+            </li>
+        </ul>
+        <div>Aikaa tulee kuluman {{sumTotalTravelTime(route)}} aikayksikköä</div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'show-route',
+        props: ['route'],
+        methods: {
+            sumTotalTravelTime(route) {
+                let sum = 0;
+                route.forEach(step => {
+                    sum += step.travelTime;
+                });
+                return sum;
+            }
+        }
+    }
+</script>

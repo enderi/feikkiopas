@@ -19,44 +19,14 @@
       </form>
     </div>
     <br/>
-    <div class="foundRoute-view" v-if="routeNotFound">
-      Reittiä ei löytynyt välille {{routeNotFound.from}} {{routeNotFound.to}}
-    </div>
-    <div class="foundRoute-view" v-if="foundRoute">
-      <div>Reitti selvä!</div>
-      <div>Etapit:</div>
-      <ul>
-        <li
-                v-for="(step, index) in foundRoute"
-                v-bind:key="index"
-        >Pysäkiltä {{step.from}} pysäkille {{step.to}} käyttäen linjaa '{{step.props['busLineName']}}'
-          ({{step.travelTime}} aikayksikköä)
-        </li>
-      </ul>
-      <div>Aikaa tulee kuluman {{sumTotalTravelTime(foundRoute)}} aikayksikköä</div>
-    </div>
+
+    <show-route-not-found v-if="routeNotFound" v-bind:route="routeNotFound"></show-route-not-found>
+    <show-route v-if="foundRoute" v-bind:route="foundRoute"></show-route>
+
     <hr>
-    <div>
-      <h3>Reitit</h3>
-      <div v-for="(line, index) in busLines" v-bind:key="index">
-        <div>Reitti '{{line.name}}':</div>
-        <div>
-                  <span v-for="(stop, index) in line.stops" v-bind:key="index">
-                    {{stop.name}}
-                      <span v-if="index < line.stops.length -1">=></span>
-                  </span>
-        </div>
-        <br>
-      </div>
-    </div>
+    <list-bus-lines v-bind:busLines="busLines"></list-bus-lines>
+    <list-bus-stop-travel-times v-bind:roads="roads"></list-bus-stop-travel-times>
 
-    <div>
-      <h3>Pysäkkien välien kestot</h3>
-      <div v-for="(road, index) in roads" v-bind:key="index">
-        {{road.from.name}} => {{road.to.name}} = {{road.travelTime}} yksikköä
-
-      </div>
-    </div>
   </div>
 
 </template>
@@ -71,6 +41,10 @@
 <script>
   import ReittiData from './data/reittiopas.json'
   import BusLineManager from './services/bus-line-manager'
+  import ShowRoute from './components/show-route'
+  import ListBusLines from './components/list-bus-lines'
+  import ListBusStopTravelTimes from "./components/list-bus-stop-travel-times"
+  import ShowRouteNotFound from "./components/show-route-not-found";
   const busLineManager = new BusLineManager()
 
   // initializing with given data set
@@ -87,6 +61,12 @@
   })
   export default {
     name: "Home",
+    components: {
+      ShowRouteNotFound,
+      ListBusStopTravelTimes,
+      ShowRoute,
+      ListBusLines
+    },
     data() {
       return {
         busStops: busLineManager.getBusStops(),
@@ -127,14 +107,6 @@
         } catch (e) {
           this.routeNotFound = {from: this.fromStop, to: this.toStop}
         }
-      }
-      ,
-      sumTotalTravelTime(route) {
-        let sum = 0;
-        route.forEach(step => {
-          sum += step.travelTime;
-        });
-        return sum;
       }
     }
   };
