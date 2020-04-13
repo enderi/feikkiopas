@@ -14,7 +14,7 @@ export default class BusLineManager {
         if(this.stops.find(stop => stop.getName() === busStopName)){
             throw new Error('Stop name already exists')
         }
-        let busStop = new BusStop(busStopName)
+        const busStop = new BusStop(busStopName);
         this.stops.push(busStop)
         return busStop
     }
@@ -24,7 +24,7 @@ export default class BusLineManager {
     }
 
     findOrCreateBusStop(busStopName){
-        let doesItExist = this.findBusStopByName(busStopName)
+        const doesItExist = this.findBusStopByName(busStopName);
         if(doesItExist) {
             return doesItExist
         }
@@ -36,9 +36,9 @@ export default class BusLineManager {
     }
 
     addRoadBetweenStops(stopNameA, stopNameB, travelTime){
-        let firstStop = this.findOrCreateBusStop(stopNameA)
-        let secondStop =this.findOrCreateBusStop(stopNameB)
-        let road = new Road(firstStop, secondStop, travelTime)
+        const firstStop = this.findOrCreateBusStop(stopNameA);
+        const secondStop = this.findOrCreateBusStop(stopNameB);
+        const road = new Road(firstStop, secondStop, travelTime);
         this.roads.push(road)
         return road;    
     }
@@ -51,10 +51,10 @@ export default class BusLineManager {
         if(this.busLines.find(line => line.getName() === busLineName)){
             throw new Error('Line already exists')
         }
-        let busLine = new BusLine(busLineName)
-        
+        const busLine = new BusLine(busLineName);
+
         stopNames.forEach(stopName=> {
-            let busStop = this.findOrCreateBusStop(stopName)
+            const busStop = this.findOrCreateBusStop(stopName);
             busLine.addStop(busStop)
         })
         this.busLines.push(busLine)
@@ -64,22 +64,16 @@ export default class BusLineManager {
         return this.busLines
     }
 
-    getAllLinesForStop(stopName) {
-        let linesThatStopIn = this.busLines.filter(l => l.doesStopIn(stopName))
-        return linesThatStopIn         
-    }
-
     getRouteSolver(){
-        let routeSolver = new BusRouteSolver()
+        const routeSolver = new BusRouteSolver();
         this.stops.forEach(stop=>routeSolver.addStop(stop.name))
         this.roads.forEach(road=>routeSolver.addTravelTimeBetweenStops(
             road.getStartBusStop().getName(),
             road.getEndBusStop().getName(),
             road.getTravelTime()))
         this.busLines.forEach(busLine => {
-            let stops = []
-            busLine.getStops().forEach(st => stops.push(st.getName()))
-            routeSolver.addBusLine(busLine.getName(), stops)
+            const busStops = busLine.getStops().map(busStop => busStop.getName())
+            routeSolver.addBusLine(busLine.getName(), busStops)
         })
         return routeSolver
     }

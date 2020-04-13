@@ -12,7 +12,7 @@ export default class Graph {
     }
 
     getNodeForName(name) {
-        let nodeForName = this.nodes.find(node => node.getName() === name)
+        const nodeForName = this.nodes.find(node => node.getName() === name);
         if (nodeForName) {
             return nodeForName
         }

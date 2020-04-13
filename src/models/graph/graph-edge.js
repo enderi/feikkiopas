@@ -26,4 +26,8 @@ export default class GraphEdge {
     getPropertyForKey(key) {
         return this.properties[key]
     }
+
+    getProperties() {
+        return this.properties
+    }
 }

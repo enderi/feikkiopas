@@ -4,7 +4,7 @@ export default class GraphPath {
     }
 
     getClone() {
-        let clone = new GraphPath()
+        const clone = new GraphPath();
         clone.setStartingNode(this.getStartingNode())
         this.getTraveledEdges().forEach(edge => clone.moveTo(edge))
         return clone
@@ -24,12 +24,12 @@ export default class GraphPath {
     }
     
     getAvailableEdges(){
-        let visitedNodes = this.getVisitedNodes()
+        const visitedNodes = this.getVisitedNodes();
         return this.currentNode.getEdgesByTravelTime().filter(edge => visitedNodes.indexOf(edge.getEndNode()) === -1)
     }
 
     moveTo(edge) {
-        let edgeFound = this.currentNode.getEdges().find(e => e === edge)
+        const edgeFound = this.currentNode.getEdges().find(e => e === edge);
         if(edgeFound){
             this.currentNode = edgeFound.getEndNode()
             this.traveledEdges.push(edgeFound)
@@ -46,7 +46,7 @@ export default class GraphPath {
     }
 
     getVisitedNodes(){
-        let visitedNodes = [this.startingNode]
+        const visitedNodes = [this.startingNode];
         this.traveledEdges.forEach(edge => visitedNodes.push(edge.getEndNode()))
         return visitedNodes
     }
@@ -61,16 +61,16 @@ export default class GraphPath {
         return sum
     }
 
-    getClearLanguageObject() {
-        let steps = []
+    getAsSimpleArray() {
+        const steps = [];
         let cursor = this.startingNode
         this.traveledEdges.forEach(edge=>{
-            let objToAdd = {
+            const objToAdd = {
                 from: cursor.getName(),
                 to: edge.getEndNode().getName(),
-                with: edge.getPropertyForKey('busLineName'),
-                travelTime: edge.getTravelTime()
-            }
+                travelTime: edge.getTravelTime(),
+                props: edge.getProperties()
+            };
             steps.push(objToAdd)
             cursor = edge.getEndNode()
         })

@@ -7,29 +7,29 @@ describe('Bus Line', () =>{
     })
 
     it('should be have name property', ()=>{
-        let busLine = new BusLine('Meksiko-Kuusamo')
+        const busLine = new BusLine('Meksiko-Kuusamo');
         expect(busLine.getName()).toEqual('Meksiko-Kuusamo')
     })
 
     it('should have info what stops are on the way', ()=>{
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
-        let stopLappeenranta = new BusStop('Lappeenranta')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
+        const stopLappeenranta = new BusStop('Lappeenranta');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         busLine.addStop(stopLappeenranta)
-        let stops = busLine.getStops()
+        const stops = busLine.getStops();
         expect(stops).toContain(stopTurku)
         expect(stops).toContain(stopTampere)
         expect(stops).toContain(stopLappeenranta)
     })
 
     it('should be able to tell the next stop from certain spot', ()=>{
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
-        let stopLappeenranta = new BusStop('Lappeenranta')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
+        const stopLappeenranta = new BusStop('Lappeenranta');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         busLine.addStop(stopLappeenranta)
@@ -39,11 +39,11 @@ describe('Bus Line', () =>{
     })
 
     it('should be return null if no such stop on the way', ()=>{
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
-        let stopLappeenranta = new BusStop('Lappeenranta')
-        let stopRovaniemi = new BusStop('Rovaniemi')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
+        const stopLappeenranta = new BusStop('Lappeenranta');
+        const stopRovaniemi = new BusStop('Rovaniemi');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         busLine.addStop(stopLappeenranta)
@@ -52,10 +52,10 @@ describe('Bus Line', () =>{
     })
 
     it('should be return null if stop is the end of the line', ()=>{
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
-        let stopLappeenranta = new BusStop('Lappeenranta')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
+        const stopLappeenranta = new BusStop('Lappeenranta');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         busLine.addStop(stopLappeenranta)
@@ -63,10 +63,10 @@ describe('Bus Line', () =>{
     })
 
     it('should be able to answer if it stops in A and B with that order', () => {
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
-        let stopLappeenranta = new BusStop('Lappeenranta')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
+        const stopLappeenranta = new BusStop('Lappeenranta');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         busLine.addStop(stopLappeenranta)
@@ -74,11 +74,11 @@ describe('Bus Line', () =>{
     })
 
     it('should be able to answer if it wont stop in A or B or the order is wrong', () => {
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
-        let stopLappeenranta = new BusStop('Lappeenranta')
-        let stopRovaniemi = new BusStop('Rovaniemi')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
+        const stopLappeenranta = new BusStop('Lappeenranta');
+        const stopRovaniemi = new BusStop('Rovaniemi');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         busLine.addStop(stopLappeenranta)
@@ -88,18 +88,18 @@ describe('Bus Line', () =>{
     })
 
     it('should have method to check if stops in certain bus stop' ,() => {
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         expect(busLine.doesStopIn('Turku')).toBeTruthy()
     })
 
     it('should have method to check if line does not stop in certain bus stop' ,() => {
-        let busLine = new BusLine('Turku-Lappeenranta')
-        let stopTurku = new BusStop('Turku')
-        let stopTampere = new BusStop('Tampere')
+        const busLine = new BusLine('Turku-Lappeenranta');
+        const stopTurku = new BusStop('Turku');
+        const stopTampere = new BusStop('Tampere');
         busLine.addStop(stopTurku)
         busLine.addStop(stopTampere)
         expect(busLine.doesStopIn('Lappeenranta')).toBeFalsy()
