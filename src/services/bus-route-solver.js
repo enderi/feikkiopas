@@ -10,9 +10,9 @@ export default class BusRouteSolver {
         this.travelTimesBetweenStops = {}
     }
 
-    addStop(stop){
+    addStop(stopName){
         const node = new GraphNode();
-        node.setName(stop)
+        node.setName(stopName)
         this.graph.addNode(node)
     }
 
@@ -43,45 +43,72 @@ export default class BusRouteSolver {
     }
 
     findShortestPathBetween(from, to) {
-        const path = new GraphPath();
         const targetNode = this.graph.getNodeForName(to);
-        path.setStartingNode(this.graph.getNodeForName(from))
+        const initialPath = new GraphPath();
+        initialPath.setStartingNode(this.graph.getNodeForName(from))
 
-        let paths = [path]
-        let winningRoute = null
-
+        let paths = [initialPath]
+        const matchingRoutes = []
         while (paths.length > 0) {
-            let newSetOfPaths = []
+            let newSetOfPathsToExplore = []
             
-            paths.forEach(p => {
-                if (p.getCurrentNode() === targetNode) {
-                    winningRoute = p
+            paths.forEach(path => {
+                if (path.getCurrentNode() === targetNode) {
+                    matchingRoutes.unshift(path) // shortest paths should always be in smaller indexes
                 } else {
-                    const edges = p.getAvailableEdges();
-                    edges.forEach(e => {
-                        const cl = p.getClone();
-                        cl.moveTo(e)
-                        newSetOfPaths.push(cl)
+                    const edges = path.getNonVisitedEdges()
+                        .sort((a, b) => {
+                            return a.getTravelTime() < b.getTravelTime() ? -1 : 1
+                        });
+                    edges.forEach(edge => {
+                        const cl = path.getClone();
+                        cl.moveTo(edge)
+                        newSetOfPathsToExplore.push(cl)
                     })
                 }
             })
-            if(winningRoute){
-                const costOfWinningRoute = winningRoute.getTotalTravelTime();
-                // check if there are still paths that could be shorter
+            if(matchingRoutes.length > 0){
+                const costOfWinningRoute = matchingRoutes[0].getTotalTravelTime();
+                // check if there are still paths that could be shorter or equally short
                 const stillToDiscover = [];
-                newSetOfPaths.forEach(p => {
-                    if(p.getTotalTravelTime() < costOfWinningRoute){
+                newSetOfPathsToExplore.forEach(p => {
+                    if(p.getTotalTravelTime() <= costOfWinningRoute){
                         stillToDiscover.push(p)
                     }
                 })
-                newSetOfPaths = stillToDiscover
+                newSetOfPathsToExplore = stillToDiscover
             }
-            paths = newSetOfPaths
+            paths = newSetOfPathsToExplore
         }
-        if (!winningRoute) {
+
+        if (matchingRoutes.length === 0) {
             throw new Error('No route found')
         }
-        return winningRoute
+        // sort all routes by travel time and least bus line changes
+        matchingRoutes.sort((path1, path2) => {
+            if(path1.getTotalTravelTime() < path2.getTotalTravelTime()){
+                return -1
+            }
+
+            if(path1.getTotalTravelTime() > path2.getTotalTravelTime()){
+                return 1
+            }
+            let lineChangesForPath1 = path1
+                .getTraveledEdges()
+                .map(edge => edge.getPropertyForKey('busLineName'))
+                .filter((value, index, self) => {
+                    return self.indexOf(value) === index
+                })
+            let lineChangesForPath2 = path2
+                .getTraveledEdges()
+                .map(edge => edge.getPropertyForKey('busLineName'))
+                .filter((value, index, self) => {
+                    return self.indexOf(value) === index
+                })
+            return lineChangesForPath1.length < lineChangesForPath2.length ? -1 : 1
+        })
+
+        return matchingRoutes[0]
     }
 
 }

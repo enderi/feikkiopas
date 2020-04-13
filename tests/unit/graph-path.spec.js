@@ -29,18 +29,18 @@ describe('Graph Path', () => {
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
-        const availableEdges = graphPath.getAvailableEdges();
+        const availableEdges = graphPath.getNonVisitedEdges();
         expect(availableEdges).toHaveLength(1)
         expect(availableEdges[0].getTravelTime()).toEqual(2)
         expect(availableEdges[0].getEndNode()).toEqual(graph.getNodeForName('Second'))
     });
-    
+
     it('should be able to move to next node', () => {
         const graph = buildGraph();
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
-        const availableEdges = graphPath.getAvailableEdges();
+        const availableEdges = graphPath.getNonVisitedEdges();
 
         graphPath.moveTo(availableEdges[0])
         const secondNode = graph.getNodeForName('Second');
@@ -66,7 +66,7 @@ describe('Graph Path', () => {
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
 
-        graphPath.moveTo(graphPath.getAvailableEdges()[0])
+        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
 
         expect(graphPath.getVisitedNodes()).toHaveLength(2)
     })
@@ -76,12 +76,12 @@ describe('Graph Path', () => {
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
-        let nextMoves = graphPath.getAvailableEdges()
+        let nextMoves = graphPath.getNonVisitedEdges()
         graphPath.moveTo(nextMoves[0])
-        nextMoves = graphPath.getAvailableEdges()
+        nextMoves = graphPath.getNonVisitedEdges()
         graphPath.moveTo(nextMoves[0])
 
-        nextMoves = graphPath.getAvailableEdges()
+        nextMoves = graphPath.getNonVisitedEdges()
         expect(graphPath.getCurrentNode().getName()).toEqual('Third')
         expect(nextMoves).toHaveLength(0)
     });
@@ -97,11 +97,11 @@ describe('Graph Path', () => {
         secondEdgeFrom3to1.setTravelTime(4)
         graph.getNodeForName('Third').addEdge(secondEdgeFrom3to1)
 
-        let nextMoves = graphPath.getAvailableEdges()
+        let nextMoves = graphPath.getNonVisitedEdges()
         graphPath.moveTo(nextMoves[0])
-        nextMoves = graphPath.getAvailableEdges()
+        nextMoves = graphPath.getNonVisitedEdges()
         graphPath.moveTo(nextMoves[0])
-        nextMoves = graphPath.getAvailableEdges()
+        nextMoves = graphPath.getNonVisitedEdges()
 
         expect(graphPath.getCurrentNode().getName()).toEqual('Third')
         expect(nextMoves).toHaveLength(0)
@@ -112,9 +112,9 @@ describe('Graph Path', () => {
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
-        let nextMove = graphPath.getAvailableEdges()[0]
+        let nextMove = graphPath.getNonVisitedEdges()[0]
         graphPath.moveTo(nextMove)
-        nextMove = graphPath.getAvailableEdges()[0]
+        nextMove = graphPath.getNonVisitedEdges()[0]
         graphPath.moveTo(nextMove)
         expect(graphPath.getTotalTravelTime()).toEqual(22)
 
@@ -125,9 +125,9 @@ describe('Graph Path', () => {
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
-        let nextMove = graphPath.getAvailableEdges()[0]
+        let nextMove = graphPath.getNonVisitedEdges()[0]
         graphPath.moveTo(nextMove)
-        nextMove = graphPath.getAvailableEdges()[0]
+        nextMove = graphPath.getNonVisitedEdges()[0]
         graphPath.moveTo(nextMove)
         const traveledEdges = graphPath.getTraveledEdges();
         expect(traveledEdges).toHaveLength(2)
@@ -141,8 +141,8 @@ describe('Graph Path', () => {
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
 
-        graphPath.moveTo(graphPath.getAvailableEdges()[0])
-        graphPath.moveTo(graphPath.getAvailableEdges()[0])
+        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
+        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
 
         expect(graphPath.getVisitedNodes()).toHaveLength(3)
         
@@ -160,8 +160,8 @@ describe('Graph Path', () => {
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
         
-        graphPath.moveTo(graphPath.getAvailableEdges()[0])
-        graphPath.moveTo(graphPath.getAvailableEdges()[0])
+        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
+        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
 
         expect(graphPath.getVisitedNodes()).toHaveLength(3)
 
@@ -176,8 +176,8 @@ describe('Graph Path', () => {
         const graphPath = new GraphPath();
         graphPath.setStartingNode(startingNode)
         
-        graphPath.moveTo(graphPath.getAvailableEdges()[0])
-        graphPath.moveTo(graphPath.getAvailableEdges()[0])
+        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
+        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
 
         const easyToRead = graphPath.getAsSimpleArray();
         expect(easyToRead).toHaveLength(2)

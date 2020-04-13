@@ -1,0 +1,23 @@
+{
+  "pysakit": [
+    "L",
+    "M",
+    "N"
+  ],
+  "tiet": [
+    {
+      "mista": "L",
+      "mihin": "M",
+      "kesto": 1
+    },
+    {
+      "mista": "M",
+      "mihin": "N",
+      "kesto": 2
+    }
+  ],
+  "linjastot": {
+    "Cargo": ["M", "N"],
+    "Express": ["L", "M", "N"]
+  }
+}

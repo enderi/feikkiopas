@@ -23,9 +23,11 @@ export default class GraphPath {
         return this.currentNode
     }
     
-    getAvailableEdges(){
+    getNonVisitedEdges(){
         const visitedNodes = this.getVisitedNodes();
-        return this.currentNode.getEdgesByTravelTime().filter(edge => visitedNodes.indexOf(edge.getEndNode()) === -1)
+        return this.currentNode
+            .getEdges()
+            .filter(edge => visitedNodes.indexOf(edge.getEndNode()) === -1)
     }
 
     moveTo(edge) {

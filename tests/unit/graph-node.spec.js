@@ -14,15 +14,6 @@ describe('Graph Node', () => {
 
     it('should know edges leaving it', () => {
         const graphNode = new GraphNode();
-        const graphEdge = new GraphEdge();
-        graphNode.addEdge(graphEdge)
-
-        expect(graphNode.getEdges()).toHaveLength(1)
-    });
-
-
-    it('should be able to return edges sorted by travel time', () => {
-        const graphNode = new GraphNode();
         let graphEdge = new GraphEdge()
         graphEdge.setTravelTime(10)
         graphNode.addEdge(graphEdge)
@@ -35,10 +26,10 @@ describe('Graph Node', () => {
         graphEdge.setTravelTime(20)
         graphNode.addEdge(graphEdge)
 
-        const edgesByTravelTime = graphNode.getEdgesByTravelTime();
+        const edgesByTravelTime = graphNode.getEdges();
         expect(edgesByTravelTime).toHaveLength(3)
-        expect(edgesByTravelTime[0].getTravelTime()).toEqual(1)
-        expect(edgesByTravelTime[1].getTravelTime()).toEqual(10)
+        expect(edgesByTravelTime[0].getTravelTime()).toEqual(10)
+        expect(edgesByTravelTime[1].getTravelTime()).toEqual(1)
         expect(edgesByTravelTime[2].getTravelTime()).toEqual(20)
     });
 })

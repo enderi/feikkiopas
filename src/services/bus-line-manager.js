@@ -12,10 +12,11 @@ export default class BusLineManager {
 
     addBusStop(busStopName){
         if(this.stops.find(stop => stop.getName() === busStopName)){
-            throw new Error('Stop name already exists')
+            throw new Error('Bus stop name already exists')
         }
         const busStop = new BusStop(busStopName);
         this.stops.push(busStop)
+
         return busStop
     }
 

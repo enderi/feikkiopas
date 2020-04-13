@@ -18,10 +18,4 @@ export default class GraphNode {
     getEdges(){
         return this.edges
     }
-    getEdgesByTravelTime(){
-        return this.edges.sort((a, b) => {
-            return a.getTravelTime() < b.getTravelTime() ? -1 : 1
-        });
-    }
-
 }

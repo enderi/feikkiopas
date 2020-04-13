@@ -72,9 +72,9 @@ describe('Graph', () => {
 
         // start a path
         const step0 = graph.getNodeForName('First');
-        const step1 = step0.getEdgesByTravelTime()[0].getEndNode();
-        const step2 = step1.getEdgesByTravelTime()[0].getEndNode();
-        const step3 = step2.getEdgesByTravelTime()[0].getEndNode();
+        const step1 = step0.getEdges()[0].getEndNode();
+        const step2 = step1.getEdges()[0].getEndNode();
+        const step3 = step2.getEdges()[0].getEndNode();
 
         expect(step0.getName()).toEqual('First')
         expect(step1.getName()).toEqual('Second')
@@ -87,11 +87,11 @@ describe('Graph', () => {
 
         const step0 = graph.getNodeForName('First');
 
-        const edge1 = step0.getEdgesByTravelTime()[0];
+        const edge1 = step0.getEdges()[0];
         const step1 = edge1.getEndNode();
-        const edge2 = step1.getEdgesByTravelTime()[0];
+        const edge2 = step1.getEdges()[0];
         const step2 = edge2.getEndNode();
-        const edge3 = step2.getEdgesByTravelTime()[0];
+        const edge3 = step2.getEdges()[0];
         const step3 = edge3.getEndNode();
 
         const totalTravelTime = edge1.getTravelTime() + edge2.getTravelTime() + edge3.getTravelTime();
