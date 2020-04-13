@@ -102,6 +102,7 @@
                     return
                 }
                 this.routeNotFound = null
+                this.foundRoute = null
                 try {
                     const route = store.state.busLineManager.getRouteSolver().findShortestPathBetween(
                         this.fromStop,
