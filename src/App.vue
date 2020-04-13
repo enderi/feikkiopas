@@ -69,7 +69,7 @@
   }
 </style>
 <script>
-  import ReittiData from './resources/reittiopas.json'
+  import ReittiData from './data/reittiopas.json'
   import BusLineManager from './services/bus-line-manager'
   const busLineManager = new BusLineManager()
 
