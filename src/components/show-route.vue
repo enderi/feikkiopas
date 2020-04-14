@@ -15,9 +15,15 @@
 </template>
 
 <script>
+    import Constants from '../const'
     export default {
         name: 'show-route',
         props: ['route'],
+        data() {
+            return {
+                Constants
+            }
+        },
         methods: {
             sumTotalTravelTime(route) {
                 let sum = 0;
