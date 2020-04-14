@@ -10,6 +10,9 @@
 ## Hakualgoritmi
 Reitin hakuun käytetty algoritmi käy verkkoa läpi leveyssuunnassa (BFS) ja löydettyään lyhimmän (tai useamman yhtä pitkän) lopettaa haun. Saadusta tulosjoukosta valitaan se, jossa on käytetty vähiten eri linjastoja. 
 
+## Demo
+[Sovellus Herokussa](https://pacific-river-34792.herokuapp.com/)
+
 ---
 Buildi, testi ja käynnistyskäskyt alla. (Vue CLI:n generoima)
 ## Project setup
