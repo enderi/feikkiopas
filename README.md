@@ -8,7 +8,7 @@
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 
 ## Hakualgoritmi
-Reitin hakuun käytetty algoritmi käy verkkoa läpi leveyssuunnassa (BFS) ja löydettyään lyhimmän (tai useamman yhtä pitkän) lopettaa haun. Saadusta tulosjoukosta valitaan se, jossa on käytetty vähiten eri linjastoja. 
+Reitti haetaan käymällä verkkoa läpi leveyssuunnassa, eli rinnakkain jokaiseen lähtevään kaareen. Päämäärän löydyttyä tarkistetaan vielä sellaiset reitit, joilla on mahdollista saada pienempi kokonaisaika. Saadusta tulosjoukosta valitaan se, jossa on vähiten linjastonvaihtoja.
 
 ## Demo
 [Sovellus Herokussa](https://pacific-river-34792.herokuapp.com/)

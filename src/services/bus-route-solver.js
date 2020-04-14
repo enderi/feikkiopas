@@ -39,16 +39,16 @@ function compareTravelTimesOfEdges (edge1, edge2) {
 
 function findShortestRoutes (initialPath, targetNode) {
   let pathsToExplore = [initialPath]
-  const winnerPaths = []
+  const successfulPaths = []
 
   while (pathsToExplore.length > 0) {
     let newSetOfPathsToExplore = []
 
-    // Look through each path that are still alive and check if they are in the target node
+    // Look through each path that is still alive and check if they have reached the target node
     pathsToExplore.forEach(path => {
-      if (path.getCurrentNode() === targetNode) {
-        winnerPaths.push(path) // store successful paths in array
-      } else {
+      if (path.getCurrentNode() === targetNode) { // path found its target
+        successfulPaths.push(path)
+      } else { // continue exploring this path
         const edges = path.getNonVisitedEdges().sort(compareTravelTimesOfEdges)
         edges.forEach(edge => {
           const cl = path.getClone()
@@ -58,20 +58,18 @@ function findShortestRoutes (initialPath, targetNode) {
       }
     })
 
-    if (winnerPaths.length > 0) {
-      // we prefer our paths short and with minimum changes
-      winnerPaths.sort(comparePathsByTravelTimeAndLineChanges)
+    if (successfulPaths.length > 0) { // we found at least one route to target, but there might still be shorter available
+      successfulPaths.sort(comparePathsByTravelTimeAndLineChanges)
 
-      const costOfWinningRoute = winnerPaths[0].getTotalTravelTime()
-
-      // check if there are still paths that could be shorter or equally short
+      const costOfCurrentBest = successfulPaths[0].getTotalTravelTime()
+      // include paths that could be shorter or equally short
       newSetOfPathsToExplore = newSetOfPathsToExplore.filter(p => {
-        return p.getTotalTravelTime() <= costOfWinningRoute
+        return p.getTotalTravelTime() <= costOfCurrentBest
       })
     }
     pathsToExplore = newSetOfPathsToExplore
   }
-  return winnerPaths
+  return successfulPaths
 }
 
 /* ACTUAL CLASS */
@@ -93,8 +91,7 @@ export default class BusRouteSolver {
   }
 
   addTravelTimeBetweenStops (from, to, time) {
-    this.travelTimesBetweenStops[from] =
-      this.travelTimesBetweenStops[from] || {}
+    this.travelTimesBetweenStops[from] = this.travelTimesBetweenStops[from] || {}
     this.travelTimesBetweenStops[to] = this.travelTimesBetweenStops[to] || {}
 
     this.travelTimesBetweenStops[from][to] = time
