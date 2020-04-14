@@ -8,6 +8,9 @@
 ## Hakualgoritmi
 Reitin hakuun käytetty algoritmi käy verkkoa läpi leveyssuunnassa (BFS) ja löydettyään lyhimmän (tai useamman yhtä pitkän) lopettaa haun. Saadusta tulosjoukosta valitaan se, jossa on käytetty vähiten eri linjastoja. 
 
+## Test status
+[![Build Status](https://travis-ci.org/enderi/feikkiopas.svg?branch=master)](https://travis-ci.org/enderi/feikkiopas)
+
 ---
 Buildi, testi ja käynnistyskäskyt alla. (Vue CLI:n generoima)
 ## Project setup
