@@ -101,4 +101,16 @@ describe('Bus Line Manager', () => {
         expect(routeSolver).not.toBeNull()
         expect(routeSolver.getNodes()).toHaveLength(4)
     });
+
+    it('should be able to use bi-directional lines', () => {
+        const busLineManager = new BusLineManager();
+        busLineManager.addRoadBetweenStops('Stop 1', 'Stop 2', 5)    
+        busLineManager.addBusLine('Route A', ['Stop 1', 'Stop 2'])
+        const routeSolver = busLineManager.getRouteSolver(true);
+        expect(routeSolver).not.toBeNull()
+        const nodes = routeSolver.getNodes()
+        expect(nodes).toHaveLength(2)
+        expect(nodes[0].getEdges()).toHaveLength(1)
+        expect(nodes[1].getEdges()).toHaveLength(1)
+    });
 })

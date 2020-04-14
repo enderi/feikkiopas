@@ -6,7 +6,12 @@
         <div>
                   <span v-for="(stop, index) in line.stops" v-bind:key="index">
                     {{stop.name}}
-                      <span v-if="index < line.stops.length -1">=></span>
+                      <span v-if="index < line.stops.length -1">
+                        <span v-if="!biDirectional">=></span>
+                        <span v-if="biDirectional">
+                            &lt;=>
+                        </span>
+                      </span>
                   </span>
         </div>
     </div>
@@ -16,6 +21,6 @@
 <script>
     export default {
         name: 'list-bus-lines',
-        props: ['busLines']
+        props: ['busLines', 'biDirectional']
     }
 </script>

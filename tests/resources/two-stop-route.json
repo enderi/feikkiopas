@@ -1,0 +1,16 @@
+{
+  "pysakit": [
+    "Start",
+    "End"
+  ],
+  "tiet": [
+    {
+      "mista": "Start",
+      "mihin": "End",
+      "kesto": 3
+    }
+  ],
+  "linjastot": {
+    "PhonyExpress": ["Start", "End"]
+  }
+}

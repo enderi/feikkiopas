@@ -131,7 +131,7 @@ describe('Graph Path', () => {
         graphPath.moveTo(nextMove)
         const traveledEdges = graphPath.getTraveledEdges();
         expect(traveledEdges).toHaveLength(2)
-        expect(traveledEdges[0].getPropertyForKey('busLine')).toEqual('Highway Star')
+        expect(traveledEdges[0].getProperty('busLine')).toEqual('Highway Star')
     });
 
     it('should be able to go back to previous node', () => {
@@ -201,7 +201,7 @@ describe('Graph Path', () => {
         const edge1to2 = new GraphEdge();
         edge1to2.setEndNode(node2)
         edge1to2.setTravelTime(2)
-        edge1to2.setPropertyForKey('busLine', 'Highway Star')
+        edge1to2.setProperty('busLine', 'Highway Star')
         node1.addEdge(edge1to2)
 
         const edge2to3 = new GraphEdge();

@@ -6,7 +6,7 @@
             <li
                     v-for="(step, index) in route"
                     v-bind:key="index"
-            >Pysäkiltä {{step.from}} pysäkille {{step.to}} käyttäen linjaa '{{step.props['busLineName']}}'
+            >Pysäkiltä {{step.from}} pysäkille {{step.to}} käyttäen linjaa '{{step.props[Constants.BUS_LINE_PROPERTY]}}'
                 ({{step.travelTime}} aikayksikköä)
             </li>
         </ul>

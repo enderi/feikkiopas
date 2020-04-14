@@ -19,11 +19,11 @@ export default class GraphEdge {
         return this.endNode
     }
 
-    setPropertyForKey(key, value){
+    setProperty(key, value){
         this.properties[key] = value
     }
 
-    getPropertyForKey(key) {
+    getProperty(key) {
         return this.properties[key]
     }
 

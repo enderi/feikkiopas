@@ -1,5 +1,5 @@
 <template>
-  <div class="home" v-bind:class="{styled: isStyleOn}">
+  <div class="home">
     <div>
       <h3>Hae reitti</h3>
       <form v-on:submit.prevent="calculateRoute">
@@ -15,6 +15,8 @@
           <option v-for="stop in busStops" v-bind:key="stop.name">{{stop.name}}</option>
         </select>
         <br/>
+        <input type="checkbox" id="biDirectionalCheckbox" value="Kahdensuuntaiset reitit" v-model="useBiDirectionalLines">
+        <label for="biDirectionalCheckbox">Kahdensuuntaiset reitit</label><br>
         <input type="submit" value="Laske reitti"/>
       </form>
     </div>
@@ -24,20 +26,13 @@
     <show-route v-if="foundRoute" v-bind:route="foundRoute"></show-route>
 
     <hr>
-    <list-bus-lines v-bind:busLines="busLines"></list-bus-lines>
+    <list-bus-lines v-bind:busLines="busLines" v-bind:biDirectional="useBiDirectionalLines"></list-bus-lines>
     <list-bus-stop-travel-times v-bind:roads="roads"></list-bus-stop-travel-times>
 
   </div>
 
 </template>
-<style>
-  .styled .box {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    vertical-align: center;
-  }
-</style>
+
 <script>
   import ReittiData from './data/reittiopas.json'
   import BusLineManager from './services/bus-line-manager'
@@ -75,9 +70,9 @@
         distancesObj: null,
         fromStop: null,
         toStop: null,
+        useBiDirectionalLines: true,
         foundRoute: null,
-        routeNotFound: null,
-        isStyleOn: true
+        routeNotFound: null
       };
     },
     mounted() {
@@ -98,7 +93,9 @@
         this.routeNotFound = null
         this.foundRoute = null
         try {
-          const route = busLineManager.getRouteSolver().findShortestPathBetween(
+          const solver = busLineManager.getRouteSolver(this.useBiDirectionalLines)
+          
+          const route = solver.findShortestPathBetween(
                   this.fromStop,
                   this.toStop
           );

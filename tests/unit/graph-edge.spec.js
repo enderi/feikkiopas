@@ -27,16 +27,16 @@ describe('Graph Edge', () => {
         const endNode = new GraphNode();
         endNode.setName('end noode')
         graphEdge.setEndNode(endNode)
-        graphEdge.setPropertyForKey('prop1', 'some prop')
+        graphEdge.setProperty('prop1', 'some prop')
         const propObject = {key: 'val'};
-        graphEdge.setPropertyForKey('prop2', propObject)
-        expect(graphEdge.getPropertyForKey('prop1')).toEqual('some prop')
-        expect(graphEdge.getPropertyForKey('prop2')).toEqual(propObject)
+        graphEdge.setProperty('prop2', propObject)
+        expect(graphEdge.getProperty('prop1')).toEqual('some prop')
+        expect(graphEdge.getProperty('prop2')).toEqual(propObject)
     });
 
     it('should have a method to return all props', () => {
         const graphEdge = new GraphEdge();
-        graphEdge.setPropertyForKey('testing', 'one-two-three')
+        graphEdge.setProperty('testing', 'one-two-three')
 
         const props = graphEdge.getProperties()
         expect(props['testing']).toEqual('one-two-three')
