@@ -65,9 +65,9 @@ export default class BusLineManager {
     return this.busLines
   }
 
-  getRouteSolver (biDirectionalLines) {
+  getRouteSolver (useBiDirectionalLines) {
     const routeSolver = new BusRouteSolver()
-    routeSolver.setBiDirectionalLines(biDirectionalLines)
+    routeSolver.setBiDirectionalLines(useBiDirectionalLines)
     this.stops.forEach(stop => routeSolver.addStop(stop.name))
     this.roads.forEach(road =>
       routeSolver.addTravelTimeBetweenStops(
