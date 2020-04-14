@@ -40,13 +40,6 @@ export default class GraphPath {
         }
     }
 
-    moveBack(){
-        if(this.traveledEdges.length === 0) {
-            throw new Error('Cannot go back anymore')
-        }
-        this.traveledEdges.pop()
-    }
-
     getVisitedNodes(){
         const visitedNodes = [this.startingNode];
         this.traveledEdges.forEach(edge => visitedNodes.push(edge.getEndNode()))

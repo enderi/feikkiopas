@@ -1,5 +1,5 @@
 import ReittiData from './data/reittiopas.json'
-import BusLineManager from "./services/bus-line-manager"
+import BusLineManager from './services/bus-line-manager'
 
 const busLineManager = new BusLineManager()
 
@@ -12,8 +12,8 @@ ReittiData.tiet.forEach(tie => {
   busLineManager.addRoadBetweenStops(tie.mista, tie.mihin, tie.kesto)
 })
 
-Object.keys(ReittiData.linjastot).forEach(linjastoNimi =>{
-  busLineManager.addBusLine(linjastoNimi,  ReittiData.linjastot[linjastoNimi])
+Object.keys(ReittiData.linjastot).forEach(linjastoNimi => {
+  busLineManager.addBusLine(linjastoNimi, ReittiData.linjastot[linjastoNimi])
 })
 
 export default busLineManager

@@ -19,7 +19,7 @@
   import SearchRouteForm from './components/search-route-form'
   import ShowRoute from './components/show-route'
   import ListBusLines from './components/list-bus-lines'
-  import ListBusStopTravelTimes from "./components/list-bus-stop-travel-times"
+  import ListBusStopTravelTimes from "./COMPONENTS/list-bus-stop-travel-times"
   import ShowRouteNotFound from "./components/show-route-not-found";
   
   export default {

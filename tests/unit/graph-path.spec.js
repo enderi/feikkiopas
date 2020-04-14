@@ -71,7 +71,7 @@ describe('Graph Path', () => {
         expect(graphPath.getVisitedNodes()).toHaveLength(2)
     })
 
-    it('should not show already visited nodes as available options', () => {
+    it('should not show already visited nodes as an available options', () => {
         const graph = buildGraph();
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
@@ -86,7 +86,7 @@ describe('Graph Path', () => {
         expect(nextMoves).toHaveLength(0)
     });
 
-    it('should understand that two edges may go to same node and still not allow to move there', () => {
+    it('should understand that two edges may go to same node and still not allow to move there if visited', () => {
         const graph = buildGraph();
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
@@ -134,26 +134,7 @@ describe('Graph Path', () => {
         expect(traveledEdges[0].getProperty('busLine')).toEqual('Highway Star')
     });
 
-    it('should be able to go back to previous node', () => {
-
-        const graph = buildGraph();
-        const startingNode = graph.getNodeForName('First');
-        const graphPath = new GraphPath();
-        graphPath.setStartingNode(startingNode)
-
-        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
-        graphPath.moveTo(graphPath.getNonVisitedEdges()[0])
-
-        expect(graphPath.getVisitedNodes()).toHaveLength(3)
-        
-        graphPath.moveBack()
-        expect(graphPath.getVisitedNodes()).toHaveLength(2)
-        graphPath.moveBack()
-        expect(graphPath.getVisitedNodes()).toHaveLength(1)
-        
-    });
-
-    it('should be able to return clone of itself', () => {
+    it('should be able to return a clone of itself', () => {
 
         const graph = buildGraph();
         const startingNode = graph.getNodeForName('First');
@@ -170,7 +151,7 @@ describe('Graph Path', () => {
         expect(clone).toMatchObject(graphPath)
     });
 
-    it('should have a method for getting easy-to-read object', () => {
+    it('should have a method for getting an easy-to-read object', () => {
         const graph = buildGraph();
         const startingNode = graph.getNodeForName('First');
         const graphPath = new GraphPath();
