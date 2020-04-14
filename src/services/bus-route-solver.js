@@ -8,7 +8,7 @@ import Constants from '../const'
 function pluckDistinctLinesFromPath(path){
     return path
         .getTraveledEdges()
-        .map(edge => edge.getProperty(Constants.BUS_LINE_PROPERTY))
+        .map(edge => edge.getProperty(Constants.BUS_LINE_NAME))
         .filter((value, index, self) => {
             return self.indexOf(value) === index
         })
@@ -39,13 +39,9 @@ function findShortestRoutes(initialPath, targetNode){
         if(matchingRoutes.length > 0){
             const costOfWinningRoute = matchingRoutes[0].getTotalTravelTime()
             // check if there are still paths that could be shorter or equally short
-            const stillToDiscover = [];
-            newSetOfPathsToExplore.forEach(p => {
-                if(p.getTotalTravelTime() <= costOfWinningRoute){
-                    stillToDiscover.push(p)
-                }
+            newSetOfPathsToExplore = newSetOfPathsToExplore.filter(p => {
+                return p.getTotalTravelTime() <= costOfWinningRoute
             })
-            newSetOfPathsToExplore = stillToDiscover
         }
         pathsToExplore = newSetOfPathsToExplore
     }
@@ -87,14 +83,14 @@ export default class BusRouteSolver {
             const edge = new GraphEdge();
             edge.setEndNode(toNode)
             edge.setTravelTime(this.travelTimesBetweenStops[from][to])
-            edge.setProperty(Constants.BUS_LINE_PROPERTY, busLineName)
+            edge.setProperty(Constants.BUS_LINE_NAME, busLineName)
             fromNode.addEdge(edge)
             
             if(this.biDirectionalLines){
                 const returningEdge = new GraphEdge();
                 returningEdge.setEndNode(fromNode)
                 returningEdge.setTravelTime(this.travelTimesBetweenStops[to][from])
-                returningEdge.setProperty(Constants.BUS_LINE_PROPERTY, busLineName)
+                returningEdge.setProperty(Constants.BUS_LINE_NAME, busLineName)
                 toNode.addEdge(returningEdge)
             }
         }

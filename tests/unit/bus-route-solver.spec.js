@@ -33,8 +33,8 @@ describe('Bus Route Solver', () => {
         const path = solver.findShortestPathBetween('L', 'N')
         expect(path.getTotalTravelTime()).toEqual(3)
         const traveledEdges = path.getTraveledEdges()
-        const line1 = traveledEdges[0].getProperty(Constants.BUS_LINE_PROPERTY)
-        const line2 = traveledEdges[1].getProperty(Constants.BUS_LINE_PROPERTY)
+        const line1 = traveledEdges[0].getProperty(Constants.BUS_LINE_NAME)
+        const line2 = traveledEdges[1].getProperty(Constants.BUS_LINE_NAME)
         expect(line1).toEqual(line2)
     })
 

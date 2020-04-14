@@ -1,3 +1,3 @@
 export default {
-    BUS_LINE_PROPERTY:  'busLineName'
+    BUS_LINE_NAME:  'busLineName'
 }
