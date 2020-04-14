@@ -5,13 +5,32 @@ import GraphPath from '../models/graph/graph-path'
 import Constants from '../const'
 
 /* PRIVATE FUNCS */
-function pluckDistinctLinesFromPath (path) {
-  return path
-    .getTraveledEdges()
-    .map(edge => edge.getProperty(Constants.BUS_LINE_NAME))
-    .filter((value, index, self) => {
-      return self.indexOf(value) === index
-    })
+function comparePathsByTravelTimeAndLineChanges (path1, path2) {
+  if (path1.getTotalTravelTime() < path2.getTotalTravelTime()) {
+    return -1
+  }
+  if (path1.getTotalTravelTime() > path2.getTotalTravelTime()) {
+    return 1
+  }
+  let lineChangesForPath1 = getLineChangeCountFromPath(path1)
+  let lineChangesForPath2 = getLineChangeCountFromPath(path2)
+  return lineChangesForPath1 < lineChangesForPath2 ? -1 : 1
+}
+
+function getLineChangeCountFromPath (path) {
+  let lineChangeCount = 0
+  const edges = path.getTraveledEdges()
+  if (!edges || edges.length === 0) {
+    return 0
+  }
+  let lineNameCursor = edges[0].getProperty(Constants.BUS_LINE_NAME)
+  edges.forEach(edge => {
+    if (lineNameCursor !== edge.getProperty(Constants.BUS_LINE_NAME)) {
+      lineChangeCount++
+      lineNameCursor = edge.getProperty(Constants.BUS_LINE_NAME)
+    }
+  })
+  return lineChangeCount
 }
 
 function compareTravelTimesOfEdges (edge1, edge2) {
@@ -20,14 +39,15 @@ function compareTravelTimesOfEdges (edge1, edge2) {
 
 function findShortestRoutes (initialPath, targetNode) {
   let pathsToExplore = [initialPath]
-  const matchingRoutes = []
-  
+  const winnerPaths = []
+
   while (pathsToExplore.length > 0) {
     let newSetOfPathsToExplore = []
 
+    // Look through each path that are still alive and check if they are in the target node
     pathsToExplore.forEach(path => {
       if (path.getCurrentNode() === targetNode) {
-        matchingRoutes.unshift(path) // shortest paths should always be in smaller indexes
+        winnerPaths.push(path) // store successful paths in array
       } else {
         const edges = path.getNonVisitedEdges().sort(compareTravelTimesOfEdges)
         edges.forEach(edge => {
@@ -37,8 +57,13 @@ function findShortestRoutes (initialPath, targetNode) {
         })
       }
     })
-    if (matchingRoutes.length > 0) {
-      const costOfWinningRoute = matchingRoutes[0].getTotalTravelTime()
+
+    if (winnerPaths.length > 0) {
+      // we prefer our paths short and with minimum changes
+      winnerPaths.sort(comparePathsByTravelTimeAndLineChanges)
+
+      const costOfWinningRoute = winnerPaths[0].getTotalTravelTime()
+
       // check if there are still paths that could be shorter or equally short
       newSetOfPathsToExplore = newSetOfPathsToExplore.filter(p => {
         return p.getTotalTravelTime() <= costOfWinningRoute
@@ -46,10 +71,10 @@ function findShortestRoutes (initialPath, targetNode) {
     }
     pathsToExplore = newSetOfPathsToExplore
   }
-  return matchingRoutes
+  return winnerPaths
 }
 
-/* DA CLASS */
+/* ACTUAL CLASS */
 export default class BusRouteSolver {
   constructor () {
     this.graph = new Graph()
@@ -112,20 +137,8 @@ export default class BusRouteSolver {
     if (matchingRoutes.length === 0) {
       throw new Error('No route found')
     }
-    // sort all routes by travel time and least bus line changes
-    matchingRoutes.sort((path1, path2) => {
-      if (path1.getTotalTravelTime() < path2.getTotalTravelTime()) {
-        return -1
-      }
 
-      if (path1.getTotalTravelTime() > path2.getTotalTravelTime()) {
-        return 1
-      }
-      let lineChangesForPath1 = pluckDistinctLinesFromPath(path1)
-      let lineChangesForPath2 = pluckDistinctLinesFromPath(path2)
-      return lineChangesForPath1.length < lineChangesForPath2.length ? -1 : 1
-    })
-
+    matchingRoutes.sort(comparePathsByTravelTimeAndLineChanges)
     return matchingRoutes[0]
   }
 }

@@ -1,0 +1,84 @@
+{
+  "pysakit": [
+    "HELSINKI",
+    "KAUNIAINEN",
+    "FORSSA",
+    "TURKU",
+    "LAPPEENRANTA",
+    "KYMI",
+    "TAMPERE",
+    "PORI",
+    "OLARI",
+    "KOTKA",
+    "X"
+  ],
+  "linjastot": {
+    "ZigZagger1": ["HELSINKI", "KAUNIAINEN", "X", "OLARI", "TURKU", "X", "FORSSA", "TAMPERE"],
+    "ZigZagger2": ["KAUNIAINEN", "OLARI", "TURKU", "FORSSA"],
+    "ParallelExpress1": ["HELSINKI", "KOTKA"],
+    "ParallelExpress2": ["KOTKA", "LAPPEENRANTA"],
+    "ParallelExpress3": ["LAPPEENRANTA", "TAMPERE"]
+  },
+  "tiet": [
+    {
+      "mista": "HELSINKI",
+      "mihin": "KAUNIAINEN",
+      "kesto": 1
+    },
+    {
+      "mista": "KAUNIAINEN",
+      "mihin": "OLARI",
+      "kesto": 1
+    },
+    {
+      "mista": "OLARI",
+      "mihin": "TURKU",
+      "kesto": 1
+    },
+    {
+      "mista": "KAUNIAINEN",
+      "mihin": "X",
+      "kesto": 20000
+    },
+    {
+      "mista": "X",
+      "mihin": "OLARI",
+      "kesto": 20000
+    },
+    {
+      "mista": "X",
+      "mihin": "TURKU",
+      "kesto": 20000
+    },
+    {
+      "mista": "X",
+      "mihin": "FORSSA",
+      "kesto": 20000
+    },
+    {
+      "mista": "TURKU",
+      "mihin": "FORSSA",
+      "kesto": 1
+    },
+    {
+      "mista": "FORSSA",
+      "mihin": "TAMPERE",
+      "kesto": 1
+    },
+    {
+      "mista": "HELSINKI",
+      "mihin": "KOTKA",
+      "kesto": 1
+    },
+    {
+      "mista": "KOTKA",
+      "mihin": "LAPPEENRANTA",
+      "kesto": 1
+    },
+    {
+      "mista": "LAPPEENRANTA",
+      "mihin": "TAMPERE",
+      "kesto": 3
+    }
+  ]
+}
