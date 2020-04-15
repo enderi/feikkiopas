@@ -55,7 +55,7 @@
 
           this.foundRoute = route.getAsSimpleArray();
         } catch (e) {
-          this.routeNotFound = {from: this.fromStop, to: this.toStop}
+          this.routeNotFound = {from: formData.fromStop, to: formData.toStop}
         }
       }
     }
