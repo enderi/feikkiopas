@@ -1,6 +1,10 @@
 <template>
   <div class="foundRoute-view">
-    <div>Reitti selvä!</div>
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Reitti selvä!</strong>
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+        </span>
+    </div>
     <div>Etapit:</div>
     <ul>
       <li v-for="(step, index) in route" v-bind:key="index">
