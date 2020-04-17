@@ -1,36 +1,34 @@
 <template>
-  <div class="foundRoute-view">
-    <div>Reitti selvä!</div>
-    <div>Etapit:</div>
-    <ul>
-      <li v-for="(step, index) in route" v-bind:key="index">
-        Pysäkiltä {{ step.from }} pysäkille {{ step.to }} käyttäen linjaa '{{
-          step.props[Constants.BUS_LINE_NAME]
-        }}' ({{ step.travelTime }} aikayksikköä)
-      </li>
-    </ul>
-    <div>Aikaa tulee kuluman {{ sumTotalTravelTime(route) }} aikayksikköä</div>
+  <div>
+    <strong class="font-bold text-xl">Reitti löytyi!</strong>
+    <div class>
+      <timeline v-bind:route="this.route"></timeline>
+    </div>
   </div>
 </template>
 
 <script>
-import Constants from '../const'
+import Constants from "../const";
+import Timeline from "./timeline";
 export default {
-  name: 'show-route',
-  props: ['route'],
-  data () {
+  name: "show-route",
+  props: ["route"],
+  components: {
+    Timeline
+  },
+  data() {
     return {
       Constants
-    }
+    };
   },
   methods: {
-    sumTotalTravelTime (route) {
-      let sum = 0
+    sumTotalTravelTime(route) {
+      let sum = 0;
       route.forEach(step => {
-        sum += step.travelTime
-      })
-      return sum
+        sum += step.travelTime;
+      });
+      return sum;
     }
   }
-}
+};
 </script>
