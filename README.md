@@ -14,6 +14,8 @@ Reitti haetaan käymällä verkkoa läpi leveyssuunnassa, eli rinnakkain jokaise
 ## Demo
 [Sovellus Herokussa](https://pacific-river-34792.herokuapp.com/)
 
+[```ui-branch``` -versio Herokussa](https://obscure-dusk-26966.herokuapp.com/) (lisätty 18.4.2020)
+
 ---
 Buildi, testi ja käynnistyskäskyt alla. (Vue CLI:n generoima)
 ## Project setup
