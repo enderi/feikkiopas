@@ -15,7 +15,7 @@
     <div class="text-right">
       <a
         class="text-blue-900 hover:text-blue-600 mr-4"
-        href="https://github.com/enderi/feikkiopas/tree/ui-branch"
+        href="https://github.com/enderi/feikkiopas/"
       >Github</a>
     </div>
   </div>
