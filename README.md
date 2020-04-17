@@ -7,9 +7,16 @@
 - [Jest Testing framework](https://jestjs.io/)
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 - [MS Windows](https://en.wikipedia.org/wiki/Microsoft_Windows)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Hakualgoritmi
 Reitti haetaan käymällä verkkoa läpi leveyssuunnassa, eli rinnakkain jokaiseen lähtevään kaareen. Päämäärän löydyttyä tarkistetaan vielä sellaiset reitit, joilla on mahdollista saada pienempi kokonaisaika. Saadusta tulosjoukosta valitaan se, jossa on vähiten linjastonvaihtoja.
+
+## Tailwind CSS
+Päätin kokeilla tätä itselleni uutta tuttavuutta muotoilujen saralla. Toisin kuin valmiit komponenttikirjastot, Tailwind tarjoaa lähinnä apuluokkia joilla rakentaa omannäköisensä käyttöliittymä. Lopputuloksena varmasti yksilöllisempi, mutta koodin kauneudesta voi olla montaa mieltä.
+
+### Timeline-komponentti
+Timeline-komponentti on otettu ja modifioita [täältä](https://vuejsexamples.com/a-simple-timeline-panel/)
 
 ## Demo
 [Sovellus Herokussa](https://pacific-river-34792.herokuapp.com/)
