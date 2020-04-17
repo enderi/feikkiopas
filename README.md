@@ -12,16 +12,15 @@
 ## Hakualgoritmi
 Reitti haetaan käymällä verkkoa läpi leveyssuunnassa, eli rinnakkain jokaiseen lähtevään kaareen. Päämäärän löydyttyä tarkistetaan vielä sellaiset reitit, joilla on mahdollista saada pienempi kokonaisaika. Saadusta tulosjoukosta valitaan se, jossa on vähiten linjastonvaihtoja.
 
+
 ## Tailwind CSS
 Päätin kokeilla tätä itselleni uutta tuttavuutta muotoilujen saralla. Toisin kuin valmiit komponenttikirjastot, Tailwind tarjoaa lähinnä apuluokkia joilla rakentaa omannäköisensä käyttöliittymä. Lopputuloksena varmasti yksilöllisempi, mutta koodin kauneudesta voi olla montaa mieltä.
 
 ### Timeline-komponentti
 Timeline-komponentti on otettu ja modifioita [täältä](https://vuejsexamples.com/a-simple-timeline-panel/)
 
-## Demo
+## Demo (tyylit lisätty 18.4.2020)
 [Sovellus Herokussa](https://obscure-dusk-26966.herokuapp.com/)
-
-[```ui-branch``` -versio Herokussa](https://obscure-dusk-26966.herokuapp.com/) (lisätty 18.4.2020)
 
 ---
 Buildi, testi ja käynnistyskäskyt alla. (Vue CLI:n generoima)
