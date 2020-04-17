@@ -19,7 +19,7 @@ Päätin kokeilla tätä itselleni uutta tuttavuutta muotoilujen saralla. Toisin
 Timeline-komponentti on otettu ja modifioita [täältä](https://vuejsexamples.com/a-simple-timeline-panel/)
 
 ## Demo
-[Sovellus Herokussa](https://pacific-river-34792.herokuapp.com/)
+[Sovellus Herokussa](https://obscure-dusk-26966.herokuapp.com/)
 
 ---
 Buildi, testi ja käynnistyskäskyt alla. (Vue CLI:n generoima)
