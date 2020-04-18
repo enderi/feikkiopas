@@ -8,6 +8,7 @@
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 - [MS Windows](https://en.wikipedia.org/wiki/Microsoft_Windows)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [vue-scrollto](https://github.com/rigor789/vue-scrollto)
 
 ## Hakualgoritmi
 Reitti haetaan käymällä verkkoa läpi leveyssuunnassa, eli rinnakkain jokaiseen lähtevään kaareen. Päämäärän löydyttyä tarkistetaan vielä sellaiset reitit, joilla on mahdollista saada pienempi kokonaisaika. Saadusta tulosjoukosta valitaan se, jossa on vähiten linjastonvaihtoja.
