@@ -8,8 +8,10 @@
         <hr class="my-4" />
         <list-bus-lines v-bind:busLines="busLineManager.getBusLines()"></list-bus-lines>
       </div>
-      <div class="bg-white shadow-md rounded mx-4 px-8 pt-6 pb-8 mb-4" v-if="foundRoute">
-        <show-route v-if="foundRoute" v-bind:route="foundRoute"></show-route>
+      <div id="show-route">
+        <div class="bg-white shadow-md rounded mx-4 px-8 pt-6 pb-8 mb-4" v-if="foundRoute">
+          <show-route v-if="foundRoute" v-bind:route="foundRoute"></show-route>
+        </div>
       </div>
     </div>
     <div class="text-right">
@@ -28,7 +30,7 @@ import SearchRouteForm from "./components/search-route-form";
 import ShowRoute from "./components/show-route";
 import ListBusLines from "./components/list-bus-lines";
 import ShowRouteNotFound from "./components/show-route-not-found";
-
+import VueScrollTo from 'vue-scrollto';
 export default {
   name: "Home",
   components: {
@@ -62,6 +64,7 @@ export default {
         );
 
         this.foundRoute = route.getAsSimpleArray();
+        VueScrollTo.scrollTo('#show-route', 1000)
       } catch (e) {
         this.routeNotFound = { from: formData.fromStop, to: formData.toStop };
       }
