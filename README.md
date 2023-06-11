@@ -1,7 +1,10 @@
 [![Build Status](https://travis-ci.org/enderi/feikkiopas.svg?branch=master)](https://travis-ci.org/enderi/feikkiopas)
 
 # Solidabis Koodihaaste
-- [Speksit](https://koodihaaste.solidabis.com/)
+- ~~[Speksit](https://koodihaaste.solidabis.com/)~~ Linkki vanhentunut
+
+![image](https://github.com/enderi/feikkiopas/assets/2479020/e4665f35-8f29-4862-b836-3adfa634f49e)
+
 ## Teknopino
 - [Vue.js](https://vuejs.org/) (projekti luotu w/ [Vue CLI](https://cli.vuejs.org/))
 - [Jest Testing framework](https://jestjs.io/)
@@ -27,6 +30,7 @@ Timeline-komponentti on otettu ja modifioita [täältä](https://vuejsexamples.c
 Buildi, testi ja käynnistyskäskyt alla. (Vue CLI:n generoima)
 ## Project setup
 ```
+# testattu node versiolla 16.20.0
 npm install
 ```
 
